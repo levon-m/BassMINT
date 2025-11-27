@@ -2,8 +2,6 @@
 
 An embedded C++ device for transcribing 4-string bass guitar tablature using optical string sensing, real-time pitch detection, and MIDI.
 
----
-
 ## Overview
 
 BassMINT provides:
@@ -47,8 +45,6 @@ Application Layer
 └── App             - Main orchestrator
 ```
 
----
-
 ## Building
 
 ### Prerequisites
@@ -85,8 +81,6 @@ make -j$(nproc)
 2. Copy `build/bassmint.uf2` to the mounted drive
 3. Board will reboot automatically
 
----
-
 ## Pin Configuration
 
 See [src/hal/BoardConfig.h](src/hal/BoardConfig.h) for complete mapping.
@@ -112,8 +106,6 @@ See [src/hal/BoardConfig.h](src/hal/BoardConfig.h) for complete mapping.
 ### MIDI
 
 - **TX**: D6 (GPIO4) → UART1 @ 31250 baud
-
----
 
 ## MIDI Protocol
 
@@ -143,8 +135,6 @@ F0 7D 'B' 'M' 01 <string> <fret> <note> <velocity> F7
 | `<note>` | MIDI note number (redundant) |
 | `<velocity>` | Velocity (0-127) |
 | `F7` | SysEx end |
-
----
 
 ## Configuration
 
@@ -181,33 +171,6 @@ envelopeFollower_.setThreshold(0.15f);  // TODO: Tune for OPT101 levels
 envelopeFollower_.setHysteresis(0.6f);  // Release at 60% of attack
 ```
 
----
-
-## Testing Strategy
-
-### Phase 1: Single String (A)
-
-1. Connect only A string sensor (ADC1/GPIO27)
-2. Monitor via USB serial:
-   ```bash
-   screen /dev/ttyACM0 115200
-   ```
-3. Observe pitch detection for open A (55Hz) → fret 12 (110Hz)
-4. Verify MIDI output with external tool (e.g., `aseqdump`)
-
-### Phase 2: All Strings
-
-1. Connect all 4 sensors
-2. Test each string independently
-3. Verify no crosstalk between strings
-
-### Phase 3: Latency Measurement
-
-1. Measure time from string pluck to MIDI Note On
-2. Target: <20ms for E1 (slowest to detect)
-
----
-
 ## Known Limitations / TODOs
 
 ### Current Limitations
@@ -217,42 +180,9 @@ envelopeFollower_.setHysteresis(0.6f);  // Release at 60% of attack
 - **Fixed LED brightness**: No adaptive IR power (TODO: PWM implementation)
 - **No calibration**: Envelope thresholds hardcoded (TODO: auto-calibration routine)
 
-### Future Enhancements
-
-1. **EdgeML pitch detection**: Replace YIN with optimized ML model for <10ms latency
-2. **Velocity detection**: Map attack envelope to MIDI velocity
-3. **Adaptive thresholds**: Per-string auto-calibration for different lighting conditions
-4. **String damping detection**: Detect palm muting vs. open notes
-5. **Pitch bend**: Continuous pitch tracking for slides/vibrato
-
----
-
-## Contributing
-
-This is a hardware-specific embedded project. Key areas for contribution:
-
-1. **DSP tuning**: Optimize YIN parameters for bass range
-2. **Calibration routines**: Auto-detect optimal envelope thresholds
-3. **Testing**: Real-world bass guitar validation
-4. **Documentation**: Schematics, assembly guides
-
----
-
-## License
-
-MIT License - See LICENSE file
-
----
-
 ## References
 
 - **YIN Algorithm**: A. de Cheveigné and H. Kawahara, "YIN, a fundamental frequency estimator for speech and music," JASA, 2002.
 - **OPT101 Datasheet**: Texas Instruments
 - **RP2040 Datasheet**: Raspberry Pi Foundation
 - **MIDI 1.0 Specification**: MIDI Manufacturers Association
-
----
-
-## Contact
-
-For questions or support, open an issue on GitHub.

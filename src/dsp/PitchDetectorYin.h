@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/Types.h"
+#include <cstddef>
 #include <cstdint>
 #include <array>
 

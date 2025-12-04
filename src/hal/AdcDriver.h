@@ -3,6 +3,7 @@
 #include "core/Types.h"
 #include <cstdint>
 #include <functional>
+#include "pico/time.h"
 
 namespace BassMINT {
 

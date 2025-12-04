@@ -40,7 +40,7 @@ void StringProcessor::process() {
     }
 
     // Process samples in chunks up to frame size
-    size_t toProcess = std::min(available, PITCH_FRAME_SIZE);
+    size_t toProcess = std::min(available, static_cast<size_t>(PITCH_FRAME_SIZE));
 
     // Read from ring buffer
     size_t read = sampleBuffer_.read(rawBuffer_.data(), toProcess);

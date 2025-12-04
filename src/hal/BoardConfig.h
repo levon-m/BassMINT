@@ -39,10 +39,10 @@ constexpr uint8_t ADC_CHANNEL_STRING_D = 2;
 constexpr uint8_t ADC_CHANNEL_STRING_G = 3;
 
 // === IR LED control pins (PWM capable) ===
-constexpr uint8_t LED_PIN_STRING_E = 0;   // D0 / GPIO0
-constexpr uint8_t LED_PIN_STRING_A = 1;   // D1 / GPIO1
-constexpr uint8_t LED_PIN_STRING_D = 2;   // D2 / GPIO2
-constexpr uint8_t LED_PIN_STRING_G = 3;   // D3 / GPIO3
+constexpr uint8_t LED_PIN_STRING_E = 6;   // D4
+constexpr uint8_t LED_PIN_STRING_A = 7;   // D5
+constexpr uint8_t LED_PIN_STRING_D = 4;   // D9
+constexpr uint8_t LED_PIN_STRING_G = 2;   // D8
 
 constexpr uint8_t LED_PINS[4] = {
     LED_PIN_STRING_E,

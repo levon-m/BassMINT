@@ -49,8 +49,8 @@ bool App::init() {
     lastStatsTime_ = Timer::getTimeMillis();
 
     printf("BassMINT initialized successfully!\n");
-    printf("Sample rate: %u Hz\n", SAMPLE_RATE_HZ);
-    printf("Frame size: %u samples\n", PITCH_FRAME_SIZE);
+    printf("Sample rate: %lu Hz\n", SAMPLE_RATE_HZ);
+    printf("Frame size: %lu samples\n", PITCH_FRAME_SIZE);
     printf("Ready to rock.\n");
 
     return true;

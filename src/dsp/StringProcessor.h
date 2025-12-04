@@ -73,6 +73,11 @@ public:
      */
     size_t getBufferLevel() const { return sampleBuffer_.getAvailable(); }
 
+    /**
+     * @brief Get current envelope value (for debugging/plotting)
+     */
+    float getEnvelope() const { return envelopeFollower_.getEnvelope(); }
+
 private:
     StringId stringId_;
     float sampleRate_;

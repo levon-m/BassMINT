@@ -51,6 +51,13 @@ pico_enable_stdio_uart(bassmint 0)
 # Create map/bin/hex/uf2 files
 pico_add_extra_outputs(bassmint)
 
+# Debug output options
+option(BASSMINT_DEBUG_STATS "Enable debug statistics output" OFF)
+
+if(BASSMINT_DEBUG_STATS)
+    target_compile_definitions(bassmint PRIVATE BASSMINT_DEBUG_STATS=1)
+endif()
+
 # Compiler optimizations for embedded
 target_compile_options(bassmint PRIVATE
     -Wall

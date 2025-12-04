@@ -76,8 +76,9 @@ void App::tick() {
     // Increment loop counter
     loopCounter_++;
 
-    // Print stats every second (optional, for debugging)
     uint32_t now = Timer::getTimeMillis();
+
+    // Print stats every second (optional, for debugging)
     if (now - lastStatsTime_ >= 1000) {
         printStats();
         lastStatsTime_ = now;
@@ -114,20 +115,22 @@ void App::onAdcSample(StringId stringId, uint16_t sample) {
 void App::printStats() {
     // Print debug statistics (optional, disable for production)
     #ifdef BASSMINT_DEBUG_STATS
-    printf("--- Stats (loops/sec: %u) ---\n", loopCounter_);
+    printf("--- Stats (loops/sec: %lu) ---\n", loopCounter_);
 
     for (uint8_t i = 0; i < NUM_STRINGS; ++i) {
         const char* stringNames[] = {"E", "A", "D", "G"};
         const auto& proc = stringProcessors_[i];
         const auto& mgr = stringManagers_[i];
 
-        printf("String %s: buf=%zu, state=%d, note=%s (MIDI %u, fret %d)\n",
+        printf("String %s: buf=%zu, env=%.3f, state=%d, pitch=%.1fHz (MIDI %u, fret %d) %s\n",
                stringNames[i],
                proc.getBufferLevel(),
+               proc.getEnvelope(),
                static_cast<int>(proc.getState()),
-               mgr.isNoteOn() ? "ON " : "OFF",
+               proc.getLatestPitch().frequency,
                mgr.getCurrentMidiNote(),
-               mgr.getCurrentFret());
+               mgr.getCurrentFret(),
+               mgr.isNoteOn() ? "[ON]" : "");
     }
     #else
     // Minimal stats
